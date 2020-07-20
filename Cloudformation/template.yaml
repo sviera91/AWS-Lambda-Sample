@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Lambda function example that retrieves objects information from a bucket.
+Parameters:
+  bucket-name:
+    Description: Name of the bucket
+    Type: String
+Resources:
+  function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.lambda_handler
+      Runtime: python3.8
+      Description: Sample lambda function
+      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/lambda-role-01"
+      Timeout: 60
+      Environment:
+        Variables:
+          bucket: !Ref bucket-name
+      CodeUri: Code\index.py
+
+
+
